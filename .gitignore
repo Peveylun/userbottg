@@ -1,4 +1,6 @@
 .idea/*
-__pycache__/*
+bot/__pycache__/
+bot/misc/__pycache__/
 my_account.session
+my_account.session-journal
 database.db
