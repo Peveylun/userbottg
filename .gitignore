@@ -1,5 +1,4 @@
-config.ini
 .idea/*
+__pycache__/*
 my_account.session
 database.db
-__pycache__/*

@@ -1,20 +1,22 @@
 from time import sleep
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait
+from pyrogram.types import Message
 
+from bot.misc import TgKeys
 import todo_db
 import configparser
 
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-app = Client('my_account', api_id=config['user']['api_id'], api_hash=config['user']['api_hash'])
+app = Client('my_account', api_id=TgKeys.API_ID, api_hash=TgKeys.API_HASH)
 
 db = todo_db.DB('database.db')
 
 
 @app.on_message(filters.command('type', prefixes='.') & filters.me)
-async def type(_, msg):
+async def type(_, msg: Message):
     orig_text = msg.text.split(".type ", maxsplit=1)[1]
     text = orig_text
     tbp = ''
@@ -32,7 +34,7 @@ async def type(_, msg):
 
 
 @app.on_message(filters.command('heart', prefixes='.') & filters.me)
-async def heart(_, msg):
+async def heart(_, msg: Message):
     try:
         counter = 0
         hearts = ['❤❤❤', '🧡🧡🧡', '💛💛💛', '💚💚💚', '💙💙💙', '💜💜💜', '🖤🖤🖤', '🤍🤍🤍', '🤎🤎🤎']
@@ -73,8 +75,8 @@ async def get_chat(_, msg):
     print(await app.get_users(users_id))
 
 
-def main():
+def start_bot():
     print("started")
 
 
-app.run(main())
+app.run(start_bot())
