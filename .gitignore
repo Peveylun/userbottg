@@ -1,7 +1,8 @@
 .idea/*
 bot/__pycache__/
 bot/misc/__pycache__/
-bot/plugins/bot/__pycache__/db.cpython-310.pyc
+bot/plugins/todo/__pycache__/db.cpython-310.pyc
+bot/plugins/fun/__pycache__/some_fun.cpython-310.pyc
 bot/my_account.session
 bot/my_account.session-journal
 bot/database.db
