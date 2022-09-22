@@ -1,18 +1,15 @@
 from time import sleep
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait
-from pyrogram.types import Message
+from pyrogram.raw.types import Message
 
-from bot.misc import TgKeys
-import todo_db
+from misc.env import TgKeys
 import configparser
 
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-app = Client('my_account', api_id=TgKeys.API_ID, api_hash=TgKeys.API_HASH)
-
-db = todo_db.DB('database.db')
+app = Client('my_account', api_id=TgKeys.API_ID, api_hash=TgKeys.API_HASH, plugins=dict(root="plugins"))
 
 
 @app.on_message(filters.command('type', prefixes='.') & filters.me)
@@ -47,35 +44,15 @@ async def heart(_, msg: Message):
         print(e)
 
 
-@app.on_message(filters.command('add', prefixes='.') & filters.me)
-async def add(_, msg):
-    temp = ' '.join(msg.text.split(' ')[1:])
-    db.create(temp)
-    await msg.edit(f'Added to DB: {temp}')
-
-
-@app.on_message(filters.command('get', prefixes='.') & filters.me)
-async def get(_, msg):
-    try:
-        await msg.edit(db.get())
-    except Exception as _:
-        await msg.edit("Empty.")
-
-
-@app.on_message(filters.command('delete', prefixes='.') & filters.me)
-async def delete(_, msg):
-    db.delete(' '.join(msg.text.split(' ')[1:]))
-
-
 @app.on_message(filters.command('gch', prefixes='.') & filters.me)
-async def get_chat(_, msg):
+async def get_chat(_, msg: Message):
     users_id = []
     async for i in app.get_chat_members(msg.chat.id):
         users_id.append(i.user.id)
     print(await app.get_users(users_id))
 
 
-def start_bot():
+def start_bot() -> None:
     print("started")
 
 
