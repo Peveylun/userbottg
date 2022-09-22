@@ -4,10 +4,6 @@ from pyrogram.errors import FloodWait
 from pyrogram.raw.types import Message
 
 from misc.env import TgKeys
-import configparser
-
-config = configparser.ConfigParser()
-config.read('config.ini')
 
 app = Client('my_account', api_id=TgKeys.API_ID, api_hash=TgKeys.API_HASH, plugins=dict(root="plugins"))
 
