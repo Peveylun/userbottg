@@ -1,6 +1,6 @@
 .idea
 __pycache__
-my_account.session
-my_account.session-journal
-database.db
+*.session
+*.session-journal
+*.db
 .env
