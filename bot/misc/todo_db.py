@@ -15,12 +15,10 @@ class DB:
     def get(self) -> str:
         temp = self.cur.execute("""SELECT * FROM some_table""").fetchall()
         str = ''
-        count = 0
-        for i in range(len(temp)):
-            count += 1
-            str += f"{count} | {temp[i][1]}\n"
+        for i in temp:
+            str += f"{i[0]} | {i[1]}\n"
         return str
 
     def delete(self, text) -> None:
-        self.cur.execute(f"""DELETE FROM some_table WHERE data='{text}'""")
+        self.cur.execute(f"""DELETE FROM some_table WHERE id='{text}'""")
         self.conn.commit()
