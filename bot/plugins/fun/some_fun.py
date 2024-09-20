@@ -6,7 +6,7 @@ from pyrogram import filters, Client
 from pyrogram.errors import FloodWait
 from pyrogram.types import Message
 
-from bot.misc.useful_functions import parse_text
+from bot.misc.parsers import parse_text
 
 
 @Client.on_message(filters.command('type', prefixes='.') & filters.me)

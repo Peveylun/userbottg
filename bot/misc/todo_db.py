@@ -12,13 +12,10 @@ class DB:
         self.cur.execute(f"""INSERT INTO some_table (data) VALUES ('{text}')""")
         self.conn.commit()
 
-    def get(self) -> str:
-        temp = self.cur.execute("""SELECT * FROM some_table""").fetchall()
-        str = ''
-        for i in temp:
-            str += f"{i[0]} | {i[1]}\n"
-        return str
+    def get(self) -> list:
+        tasks: list = self.cur.execute("""SELECT * FROM some_table""").fetchall()
+        return tasks
 
-    def delete(self, text) -> None:
-        self.cur.execute(f"""DELETE FROM some_table WHERE id='{text}'""")
+    def delete(self, id) -> None:
+        self.cur.execute(f"""DELETE FROM some_table WHERE id='{id}'""")
         self.conn.commit()
